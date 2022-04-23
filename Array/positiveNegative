@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void postNegElement(int arr[], int n)
+{
+    vector<int> neg;
+    vector<int> pos;
+
+    // travese loop
+    for(int i=0; i<n; i++)
+    {
+        // if negative element present in loop to store krdo neg vector mai 
+        if(arr[i]<0)
+        neg.push_back(arr[i]);
+
+        // if not to store kro pos vector mai
+        else
+        pos.push_back(arr[i]);
+    }
+
+    // After traversing hum order maintain krenge to 3 variable lenge;
+    int i=0, j=0, k=0;
+
+    while(i<neg.size() && j<pos.size())
+    {
+        arr[k++] = pos[j++]; // positive
+        arr[k++] = neg[i++]; // negative
+    }
+
+    // if positive element negative se jayad hai to
+    while (j<pos.size())
+    {
+        arr[k++] = pos[j++];
+    }
+
+      // if negative element positive se jayad hai to
+    while (i<neg.size())
+    {
+        arr[k++] = neg[i++];
+    }
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0; i<n; i++)
+    cin>>arr[i];
+    postNegElement(arr,n);
+    for(int i=0; i<n; i++)
+    cout<<arr[i]<<" ";
+}
