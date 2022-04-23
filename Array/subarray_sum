@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> FoundSum(int arr[], int n, int subarraySum)
+{
+int i=0, j=0, sum=0;
+vector<int> ans;
+while(i<n)
+{
+    if(sum<subarraySum)
+    {
+        sum+=arr[j];
+        j++;
+    }
+    else if(sum>subarraySum)
+    {
+        sum-=arr[i];
+        i++;
+    }
+    else
+    {
+        ans.push_back(i+1);
+        ans.push_back(j);
+        return ans;
+    }
+}
+return {-1};
+}
+
+int main()
+{
+    int n, subarraySum;
+    cin >> n >> subarraySum;
+    int arr[n];
+    for(int i=0; i<n; i++)
+    {
+        cin>>arr[i];
+    }
+    vector<int> res = FoundSum(arr,n,subarraySum);
+    for(int i=0; i<res.size(); i++)
+    {
+        cout<<res[i]<<" ";
+    }
+}
