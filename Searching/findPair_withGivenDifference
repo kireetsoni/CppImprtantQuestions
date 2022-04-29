@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool findPairGivenDifference(int arr[], int n, int k)
+{
+    sort(arr,arr+n);
+    for(int i=0; i<n; i++)
+    {
+    int find = arr[i]+k;
+    int s = i+1, e = n-1;
+    int mid = s+(e-s)/2;
+
+    while(s<=e)
+    {
+        if(arr[mid] == find)
+        return true;
+
+        else if(arr[mid] > find)
+        e = mid-1;
+
+        else
+        s = mid+1;
+
+        mid = s+(e-s)/2;
+    }
+}
+return false;
+}
+
+int main()
+{
+    int n,k;
+    cin>>n>>k;
+    int arr[n];
+    for(int i=0; i<n; i++)
+    {
+        cin>>arr[i];
+    }
+    if(findPairGivenDifference(arr,n,k))
+    cout<<"True";
+    else
+    cout<<"false";
+}
