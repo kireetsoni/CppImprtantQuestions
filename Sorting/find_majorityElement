@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int majorityElement(int arr[], int n)
+{
+    // Approach 1st
+
+    // unordered_map<int,int> m;
+    // for(int i=0; i<n; i++)
+    // {
+    //     m[arr[i]]++;
+    // }
+    // int res = -1;
+    // for(int i=0; i<n; i++)
+    // {
+    //     if(m[arr[i]] > n/2)
+    //     {
+    //     res = arr[i];
+    //     break;
+    // }
+    // }
+    // return res;
+
+    // Approach 2nd use Moore's Voting Algorithm
+
+    int cnt = 1, res = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i] == arr[res])
+            cnt++;
+        else
+            cnt--;
+
+        if (cnt == 0)
+        {
+            cnt = 1;
+            res = i;
+        }
+    }
+
+    cnt = 0;
+    for(int i=0; i<n; i++)
+    {
+        if(arr[i] == arr[res])
+        cnt++;
+    }
+
+    if(cnt > n/2)
+    return arr[res];
+    else
+    return -1;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    cout << majorityElement(arr, n);
+}
