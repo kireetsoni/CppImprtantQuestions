@@ -1,0 +1,94 @@
+#include<iostream>
+using namespace std;
+class Node
+{
+ public:
+ int data;
+ Node* next;
+
+ // Constructor
+ Node(int d)
+ {
+     this->data=d;
+     this->next=NULL;
+ }
+};
+
+
+// Insert A Node into Head
+void insertAtHead(Node* &head, int d)
+{
+    // New Node Create
+    Node* temp = new Node(d);
+    temp->next = head;
+    head = temp;
+}
+
+Node* reverseLinkedList(Node* &head)
+{
+    if(head==NULL || head->next==NULL)
+    {
+        return head;
+    } 
+
+    Node* prev = NULL;
+    Node* Curr = head;
+    Node* forward = NULL;
+
+
+    while(Curr!=NULL)
+    {
+        forward=Curr->next;
+        Curr->next=prev;
+        prev=Curr;
+        Curr=forward;
+    }
+    return prev;
+}
+
+// Traverse Node Function
+void traverseNode(Node* &head)
+{   
+    Node* temp = head;
+
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+
+int main()
+{
+Node* node = new Node(10);
+Node* head = node;
+
+insertAtHead(head,20);
+
+//traverseNode(head);
+
+insertAtHead(head,30);
+
+//traverseNode(head);
+
+insertAtHead(head,40);
+
+//traverseNode(head);
+
+insertAtHead(head,50);
+
+//traverseNode(head);
+
+cout<<"Before Linked List"<<endl;
+
+traverseNode(head);
+
+cout<<"After Reverse Linked List"<<endl;
+
+head = reverseLinkedList(head);
+
+traverseNode(head);
+}
+
