@@ -1,0 +1,92 @@
+#include<iostream>
+using namespace std;
+class Node
+{
+ public:
+ int data;
+ Node* next;
+
+ // Constructor
+ Node(int d)
+ {
+     this->data=d;
+     this->next=NULL;
+ }
+};
+
+Node* kReverse(Node* head, int k)
+{
+    // base case
+    if(head==NULL)
+    {
+        return NULL;
+    }
+
+    // step 1 : reverse first k nodes
+      Node* next = NULL;
+      Node* curr = head;
+      Node* prev = NULL;
+      int cnt = 0;
+
+      while (curr!=NULL && cnt<k)
+      {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+        cnt++;
+      }
+
+      // step 2 : recursion part
+        if(next!=NULL)
+        {
+            head->next = kReverse(next,k);
+        }
+
+        // step 3 : return head of reverse list
+        return prev;
+}
+      
+
+
+// Insert A Node into Head
+void insertAtHead(Node* &head, int d)
+{
+    // New Node Create
+    Node* temp = new Node(d);
+    temp->next = head;
+    head = temp;
+}
+
+// Traverse Node Function
+void traverseNode(Node* &head)
+{   
+    Node* temp = head;
+
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+
+int main()
+{
+Node* node = new Node(10);
+Node* head = node;
+
+insertAtHead(head,20);
+
+insertAtHead(head,30);
+
+insertAtHead(head,40);
+
+insertAtHead(head,50);
+
+traverseNode(head);
+
+head = kReverse(head,3);
+traverseNode(head);
+}
